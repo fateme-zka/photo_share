@@ -10,7 +10,7 @@ class Category(models.Model):
 
 class Photo(models.Model):
     title = models.CharField(max_length=300)
-    Image = models.ImageField(null=False,blank=False,)
+    image = models.ImageField(null=False, blank=False, )
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def __str__(self):

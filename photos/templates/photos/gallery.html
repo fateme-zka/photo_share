@@ -6,9 +6,12 @@
           integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <meta charset="UTF-8">
     <title>Gallery</title>
-    {#    <style>#}
-    {#        #}
-    {#    </style>#}
+    <style>
+        .img-thumbnail-new {
+            height: 200px;
+            object-fit: cover;
+        }
+    </style>
 
 
 </head>
@@ -23,9 +26,9 @@
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">All</li>
-{#                    {% for category in categories  %}#}
-{#                        <li class="list-group-item">{{ category.name }}</li>#}
-{#                    {% endfor %}#}
+                    {% for category in categories %}
+                        <li class="list-group-item">{{ category.name }}</li>
+                    {% endfor %}
                 </ul>
             </div>
             <a class="btn btn-dark btn-sm mt-3 col-md-12" href="{% url 'add-photo' %}">Add Photo</a>
@@ -35,15 +38,13 @@
 
                 {% for photo in photos %}
                     <div class="card col-4 my-2">
-                        <img style="object-fit: cover;" class="card-img-top mt-3"
-                             src="https://a.storyblok.com/f/89243/1050x700/b9aaad5c52/photo-1591035897819-f4bdf739f446.webp"
+                        <img class="card-img-top mt-3 img-thumbnail-new"
+                             src="{{ photo.image.url }}"
                              alt="Card image cap">
                         <div class="card-body">
-                            <h6 class="card-title">Category: Girls</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of
-                                the card's content.</p>
-{#                            <a href="{% url 'photo' phot.pk %}" class="btn btn-primary">View Photo</a>#}
+                            <h6 class="card-title">Category: {{ photo.category }}</h6>
+                            <p class="card-text">{{ photo.title }}</p>
+                            <a href="{% url 'photo' photo.pk %}" class="btn btn-primary">View Photo</a>
                         </div>
                     </div>
                 {% empty %}
