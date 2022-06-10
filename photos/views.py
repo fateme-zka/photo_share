@@ -6,6 +6,10 @@ def gallery(request):
     photos = Photo.objects.all().order_by('-created_at')
     categories = Category.objects.all().order_by('-id')
 
+    category = request.GET.get('category_name')
+    if category:
+        photos = photos.filter(category__name=category)
+
     context = {
         'photos': photos,
         'categories': categories
